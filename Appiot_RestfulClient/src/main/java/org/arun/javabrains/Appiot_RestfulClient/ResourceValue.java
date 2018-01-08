@@ -23,7 +23,7 @@ public class ResourceValue {
 
 		//WebResource resource = c.resource("https://api.blab.iotacc.ericsson.net/occhub/proxy/appiot/api/v3/devices/bootstrapservernames");
 		WebResource resource = c.resource("https://iotabusinesslab-api.sensbysigma.com/api/v3/devices/"+Device_id);
-		String response = resource.accept("application/json").header("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwicGVybWlzc2lvbnMiOm51bGwsImlzcyI6ImFwcGlvdHdlYmFwaSIsImF1ZCI6ImFwcGlvdHdlYmFwaSIsImV4cCI6MTUyMjEyODg0MiwibmJmIjoxNTE0MzY0MTIzLCJpYXQiOjE1MTQzNjQxMjMsIm5hbWUiOiJhcnVuc2tleSIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwidXNlcklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIn0=.i+pHcQsAKww69CbZmgfkyd1PtqoxClM8+a8fDWdkUxU=").header("X-DeviceNetwork", "613b7124-e2db-4e76-9feb-102a869bd497").get(String.class);
+		String response = resource.accept("application/json").header("Authorization","Authorization key").header("X-DeviceNetwork", "Id").get(String.class);
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject jsonobj = (JSONObject) parser.parse(response);
@@ -49,7 +49,7 @@ public class ResourceValue {
 			System.out.println("SmartobjTempID:"+temperatureid);
 
 			WebResource resource1 = c.resource("https://iotabusinesslab-api.sensbysigma.com/api/v3/smartobjects/"+temperatureid);
-			String response1 = resource1.accept("application/json").header("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwicGVybWlzc2lvbnMiOm51bGwsImlzcyI6ImFwcGlvdHdlYmFwaSIsImF1ZCI6ImFwcGlvdHdlYmFwaSIsImV4cCI6MTUyMjEyODg0MiwibmJmIjoxNTE0MzY0MTIzLCJpYXQiOjE1MTQzNjQxMjMsIm5hbWUiOiJhcnVuc2tleSIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwidXNlcklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIn0=.i+pHcQsAKww69CbZmgfkyd1PtqoxClM8+a8fDWdkUxU=").header("X-DeviceNetwork", "613b7124-e2db-4e76-9feb-102a869bd497").get(String.class);
+			String response1 = resource1.accept("application/json").header("Authorization","Authorization key").header("X-DeviceNetwork", "ID").get(String.class);
 
 			JSONObject jsonobj1 = (JSONObject) parser.parse(response1);
 			JSONArray array1 = (JSONArray)jsonobj1.get("Resources");
@@ -67,7 +67,7 @@ public class ResourceValue {
 			System.out.println("ResourceID:"+resourceId);
 
 			WebResource resource2 = c.resource("https://iotabusinesslab-api.sensbysigma.com/api/v3/resources/"+resourceId);
-			String response2 = resource2.accept("application/json").header("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwicGVybWlzc2lvbnMiOm51bGwsImlzcyI6ImFwcGlvdHdlYmFwaSIsImF1ZCI6ImFwcGlvdHdlYmFwaSIsImV4cCI6MTUyMjEyODg0MiwibmJmIjoxNTE0MzY0MTIzLCJpYXQiOjE1MTQzNjQxMjMsIm5hbWUiOiJhcnVuc2tleSIsInRva2VuVHlwZSI6ImFjY2Vzc1Rva2VuIiwidXNlcklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIn0=.i+pHcQsAKww69CbZmgfkyd1PtqoxClM8+a8fDWdkUxU=").header("X-DeviceNetwork", "613b7124-e2db-4e76-9feb-102a869bd497").get(String.class);
+			String response2 = resource2.accept("application/json").header("Authorization","Authorization key").header("X-DeviceNetwork", "ID").get(String.class);
 			JSONObject jsonobj2 = (JSONObject) parser.parse(response2);
 			//JSONObject latestMeasurement = (JSONObject)parser.parse(jsonobj2.toJSONString()).get("LatestMeasurement");
 			String objjj = String.valueOf(jsonobj2.get("LatestMeasurement"));
@@ -75,20 +75,7 @@ public class ResourceValue {
 			String newvaluesensor = String.valueOf(newsenvalue.get("v"));
 			//String  actualSensorValue = String.valueOf(objjj.get("v"));
 			System.out.println("Sensor value: "+newvaluesensor);
-			//	JSONArray array2 = (JSONArray)jsonobj2.get("LatestMeasurement");
-			/*System.out.println(array2);
-			String value = "v";
-			String tempValue = null;
-			for (int k =0;k<array2.size();k++) {
-				boolean newsen = array2.get(k).toString().contains(value);
-				if(newsen == true) {
-					 tempValue = String.valueOf(array2.get(k));
-					 break;
-				}
-			}
-			JSONObject valueobj = (JSONObject)parser.parse(tempValue);
-			String actualSensorValue = String.valueOf(valueobj.get("v"));
-			System.out.println(actualSensorValue);*/
+			
 			System.out.println(response2);
 
 		} catch (ParseException e) {
