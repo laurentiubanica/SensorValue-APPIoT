@@ -22,43 +22,64 @@ public class ResourceValue {
 		Client c = Client.create();
 
 		//WebResource resource = c.resource("https://api.blab.iotacc.ericsson.net/occhub/proxy/appiot/api/v3/devices/bootstrapservernames");
-		WebResource resource = c.resource("https://iotabusinesslab-api.sensbysigma.com/api/v3/devices/"+Device_id);
-		String response = resource.accept("application/json").header("Authorization","Authorization key").header("X-DeviceNetwork", "Id").get(String.class);
+		WebResource resource = c.resource(System.getenv("BASE_URL")+"/api/v3/devices/"+args[0]);
+		String response = resource.accept("application/json").header("Authorization",System.getenv("AUTH_KEY")).header("X-DeviceNetwork", System.getenv("X_DEV_NETWORK")).get(String.class);
+		//System.out.println(response);
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject jsonobj = (JSONObject) parser.parse(response);
 
 
-			String str = jsonobj.toJSONString();
+			
 			JSONArray array = (JSONArray)jsonobj.get("SmartObjects");
-			String temperature = "Temperature";
+			
+			int args1 =Integer.parseInt(args[1]);
+			int args3 = Integer.parseInt(args[3]);
+			
 			String temp=null;
 			for(int i =0;i<array.size();i++) {
-				//System.out.println(array.get(i)+"\n");
-				boolean newtemp = array.get(i).toString().contains("\"Name\":\""+temperature+"\"");
-				if(newtemp == true) {
+				
+				//boolean newtemp = array.get(i).toString().contains("\"Name\":\""+args[1]+"\"");
+				String arrayElement = array.get(i).toString();
+				JSONObject elementKey = (JSONObject)parser.parse(arrayElement);
+				
+				if((Integer.parseInt(elementKey.get("TypeId").toString())== args1 ) & (Integer.parseInt(elementKey.get("InstanceNumber").toString()) == args3)) {
 					temp = String.valueOf(array.get(i));
 					break;
 				}
+			    
+				//System.out.println(newtemp);
+			/*	if(newtemp == true) {
+					temp = String.valueOf(array.get(i));
+					break;
+				}*/
 
 			}
 
 
 			JSONObject obj = (JSONObject)parser.parse(temp);
-			String temperatureid = String.valueOf(obj.get("Id"));
-			System.out.println("SmartobjTempID:"+temperatureid);
+			String smartObjid = String.valueOf(obj.get("Id"));
+			System.out.println("SmartobjTempID:"+smartObjid);
 
-			WebResource resource1 = c.resource("https://iotabusinesslab-api.sensbysigma.com/api/v3/smartobjects/"+temperatureid);
-			String response1 = resource1.accept("application/json").header("Authorization","Authorization key").header("X-DeviceNetwork", "ID").get(String.class);
+			WebResource resource1 = c.resource(System.getenv("BASE_URL")+"/api/v3/smartobjects/"+smartObjid);
+			String response1 = resource1.accept("application/json").header("Authorization",System.getenv("AUTH_KEY")).header("X-DeviceNetwork", System.getenv("X_DEV_NETWORK")).get(String.class);
 
 			JSONObject jsonobj1 = (JSONObject) parser.parse(response1);
 			JSONArray array1 = (JSONArray)jsonobj1.get("Resources");
-			String sensorValue = "Sensor Value";
+			int args2 = Integer.parseInt(args[2]);
+			
 			String reso= null;
 			for(int j=0;j<array1.size();j++) {
-				boolean newreso = array1.get(j).toString().contains("\"Name\":\""+sensorValue+"\"");
+				/*boolean newreso = array1.get(j).toString().contains("\"Name\":\""+argument2+"\"");
 				if(newreso == true) {
 					reso = String.valueOf(array1.get(j));
+				}*/
+				String arrayElement = array1.get(j).toString();
+				JSONObject elementKey = (JSONObject)parser.parse(arrayElement);
+				if(Integer.parseInt(elementKey.get("TypeId").toString())== args2) {
+	
+					reso = String.valueOf(array1.get(j));
+					break;
 				}
 			}
 
@@ -66,15 +87,15 @@ public class ResourceValue {
 			String resourceId = String.valueOf(resObj.get("Id"));
 			System.out.println("ResourceID:"+resourceId);
 
-			WebResource resource2 = c.resource("https://iotabusinesslab-api.sensbysigma.com/api/v3/resources/"+resourceId);
-			String response2 = resource2.accept("application/json").header("Authorization","Authorization key").header("X-DeviceNetwork", "ID").get(String.class);
+			WebResource resource2 = c.resource(System.getenv("BASE_URL")+"/api/v3/resources/"+resourceId);
+			String response2 = resource2.accept("application/json").header("Authorization",System.getenv("AUTH_KEY")).header("X-DeviceNetwork", System.getenv("X_DEV_NETWORK")).get(String.class);
 			JSONObject jsonobj2 = (JSONObject) parser.parse(response2);
 			//JSONObject latestMeasurement = (JSONObject)parser.parse(jsonobj2.toJSONString()).get("LatestMeasurement");
 			String objjj = String.valueOf(jsonobj2.get("LatestMeasurement"));
 			JSONObject newsenvalue = (JSONObject)parser.parse(objjj);
 			String newvaluesensor = String.valueOf(newsenvalue.get("v"));
 			//String  actualSensorValue = String.valueOf(objjj.get("v"));
-			System.out.println("Sensor value: "+newvaluesensor);
+			System.out.println("value: "+newvaluesensor);
 			
 			System.out.println(response2);
 

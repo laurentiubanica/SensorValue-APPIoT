@@ -1,4 +1,4 @@
-﻿                              ACCESS APPIOT V2 THROUGH REST API USING JAVA
+                             ACCESS APPIOT V2 THROUGH REST API USING JAVA
 
 Basic Requirements:
 	a. Install Eclipse IDE Which Supports Maven Project.
@@ -17,3 +17,14 @@ Getting Sensor value from the AppIot:
 	b. Device internal id you will get it as respose after adding the device to Appiot.
 	c. Before running this code please use the Device internal id in the code.
  	d. This code will gives the latest measurement of the sensor value.
+
+In this code we have set few variables as environment variable and few variables passing as a command line argument.
+	"BASE_URL" = environment variable.
+	"AUTH_KEY" = environment variable.
+	"X_DEV_NETWORK" = environment variable.
+	args[0] = device internal Id.
+	args[1] = smart object TypeId.
+	args[2] = resource TypeId.
+	args[3] = Instance Number.
+Make sure that before running this code the environment variable as to set in your system.
+This program gives the resource value of all the LWM2M smart objects like "Temperature","Location","Device","Addressable Text Display", etc..
