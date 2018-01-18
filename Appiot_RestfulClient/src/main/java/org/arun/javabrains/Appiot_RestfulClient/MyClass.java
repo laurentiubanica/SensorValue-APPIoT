@@ -13,7 +13,7 @@ public class MyClass {
 			
 		}
 		else {
-			System.out.println("hi");
+			
 			ResourceFunction r = new ResourceFunction(args[0],args[1],args[2],args[3]);
 			r.getResource();
 		}

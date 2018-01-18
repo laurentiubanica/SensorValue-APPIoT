@@ -31,4 +31,11 @@ Command line Arguments:
 
 This program  has a separate class to get the resource value. Any one can use this class to get the different smart object resource.
   
+To run this code through command line Please follow the below steps:
+	1. Build this code by running this command:
+		--$	mvn clean package
+	2. TO run this code use this command:
+        --$ java -cp target/Appiot_RestfulClient.jar   org.arun.javabrains.Appiot_RestfulClient.MyClass Dev_Id SmartobjTypeID ResourceTypeId InstanceNumber 
+
+Make Sure that before running this code thorough command line install Maven externally. 
 
