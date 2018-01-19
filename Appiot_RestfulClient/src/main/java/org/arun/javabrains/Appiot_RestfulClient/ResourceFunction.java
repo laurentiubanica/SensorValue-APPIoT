@@ -62,7 +62,7 @@ public class ResourceFunction {
 
 		JSONObject obj = (JSONObject)parser.parse(temp);
 		String smartObjid = String.valueOf(obj.get("Id"));
-		System.out.println("SmartobjTempID:"+smartObjid);
+		//System.out.println("SmartobjTempID:"+smartObjid);
 
 		WebResource resource1 = c.resource(System.getenv("BASE_URL")+"/api/v3/smartobjects/"+smartObjid);
 		String response1 = resource1.accept("application/json").header("Authorization",System.getenv("AUTH_KEY")).header("X-DeviceNetwork", System.getenv("X_DEV_NETWORK")).get(String.class);
@@ -88,7 +88,7 @@ public class ResourceFunction {
 
 		JSONObject resObj = (JSONObject)parser.parse(reso);
 		String resourceId = String.valueOf(resObj.get("Id"));
-		System.out.println("ResourceID:"+resourceId);
+		//System.out.println("ResourceID:"+resourceId);
 
 		WebResource resource2 = c.resource(System.getenv("BASE_URL")+"/api/v3/resources/"+resourceId);
 		String response2 = resource2.accept("application/json").header("Authorization",System.getenv("AUTH_KEY")).header("X-DeviceNetwork", System.getenv("X_DEV_NETWORK")).get(String.class);
@@ -115,7 +115,7 @@ public class ResourceFunction {
 		System.out.println(actualSensorValue);*/
 		//c5293dd6-40f7-46f2-9047-e20c515803eb Location Latitude
 		//c5293dd6-40f7-46f2-9047-e20c515803eb Temperature Sensor-Value
-		System.out.println(response2);
+		//System.out.println(response2);
 
 	} catch (ParseException e) {
 		// TODO Auto-generated catch block
