@@ -2,14 +2,14 @@
 
 Download and Build (needs maven):
 	$ git clone  https://github.com/arunkumar0/SensorValue-APPIoT
-	$ cd cd SensorValue-AppIoT/Appiot_RestfulClient
+	$ cd SensorValue-AppIoT/Appiot_RestfulClient
 	$ mvn clean package
 
 Set Environment Variables:
 	APPIOT setting are passed through these environment variables:
-	$ export BASE_URL:”https://iotabusinesslab-api.sensbysigma.com”
-	$ export AUTH_KEY:”Bearer xyzzzzzz”
-	$ export X_DEV_NETWORK:”123456778-888”
+	$ export BASE_URL="https://iotabusinesslab-api.sensbysigma.com"
+	$ export AUTH_KEY="Bearer xyzzzzzz"
+	$ export X_DEV_NETWORK="123456778-888"
 
 Usage: 
 	In Java code:
