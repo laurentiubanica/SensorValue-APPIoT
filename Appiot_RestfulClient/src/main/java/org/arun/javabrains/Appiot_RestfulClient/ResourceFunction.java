@@ -21,8 +21,9 @@ public class ResourceFunction {
 		 this.instanceNo = instanceNo;
 	}
 	
-	public void getResource() {
+	public String getResource() {
 	Client c = Client.create();
+	String newvaluesensor = null;
 
 	//WebResource resource = c.resource("https://api.blab.iotacc.ericsson.net/occhub/proxy/appiot/api/v3/devices/bootstrapservernames");
 	WebResource resource = c.resource(System.getenv("BASE_URL")+"/api/v3/devices/"+devId);
@@ -96,9 +97,10 @@ public class ResourceFunction {
 		//JSONObject latestMeasurement = (JSONObject)parser.parse(jsonobj2.toJSONString()).get("LatestMeasurement");
 		String objjj = String.valueOf(jsonobj2.get("LatestMeasurement"));
 		JSONObject newsenvalue = (JSONObject)parser.parse(objjj);
-		String newvaluesensor = String.valueOf(newsenvalue.get("v"));
+		 newvaluesensor = String.valueOf(newsenvalue.get("v"));
 		//String  actualSensorValue = String.valueOf(objjj.get("v"));
-		System.out.println("value: "+newvaluesensor);
+		//System.out.println("value: "+newvaluesensor);
+		
 		//	JSONArray array2 = (JSONArray)jsonobj2.get("LatestMeasurement");
 		/*System.out.println(array2);
 		String value = "v";
@@ -121,6 +123,7 @@ public class ResourceFunction {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	return newvaluesensor;
 	}
 
 }

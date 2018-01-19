@@ -1,31 +1,26 @@
-﻿                              ACCESS APPIOT V2 THROUGH REST API USING JAVA
+  JAVA CLASS TO ACCESS IPSO RESOURCES ON APPIOT V2
 
+Download and Build (needs maven):
+	$ git clone  https://github.com/arunkumar0/SensorValue-APPIoT
+	$ cd cd SensorValue-AppIoT/Appiot_RestfulClient
+	$ mvn clean package
 
-Getting Sensor value from the AppIot:
-	a. Use the Device internal ID to get the sensor value.
-	b. Device internal id you will get it as respose after adding the device     to Appiot.
-	c. Before running this code please use the Device internal id in the code.
- 	d. This code will gives the latest measurement of the sensor value.
+Set Environment Variables:
+	APPIOT setting are passed through these environment variables:
+	$ export BASE_URL:”https://iotabusinesslab-api.sensbysigma.com”
+	$ export AUTH_KEY:”Bearer xyzzzzzz”
+	$ export X_DEV_NETWORK:”123456778-888”
 
-In this programming we set few variables as a environment variable and also we are passing few arguments through command line.
-variables details are here:
-Environment Variables:
-	1. BASE_URL:”https://iotabusinesslab-api.sensbysigma.com”
-	2. AUTH_KEY:”Bearer xyzzzzzz”
-	3. X_DEV_NETWORK:”123456778-888”
-Command line Arguments:
-	1. args[0] = Device Internal Id:”98526258-deg8g7g-c8”
-	2. args[1] = Smart object TypeID:”3303”
-	3. args[2] = Resource TypeId:”5700”
-	4. args[3] = InstanceNumber:”0”
+Usage: 
+	In Java code:
 
-This program  has a separate class to get the resource value. Any one can use this class to get the different smart object resource.
-  
-To run this code through command line Please follow the below steps:
-	1. Build this code by running this command:
-		--$	mvn clean package
-	2. TO run this code use this command:
-        --$ java -cp target/Appiot_RestfulClient.jar   org.arun.javabrains.Appiot_RestfulClient.MyClass [Dev_Id] [SmartobjTypeID] [ResourceTypeId] [InstanceNumber] 
+        package org.arun.javabrains.Appiot_RestfulClient;
+	..
+	..
+        ResourceFunction r = new ResourceFunction(<device-id>, <smart-object-id>, <resource-type-id>, <instance-id>);
+        v = r.getResource();
+	..
 
-Make Sure that before running this code thorough command line install Maven externally. 
-
+	Also available as a command line for easy usage/testing:
+        
+        $ java -cp target/Appiot_RestfulClient.jar  org.arun.javabrains.Appiot_RestfulClient.MyClass <device-id>  <smart-object-id>  <resource-type-id>  <instance-id>
